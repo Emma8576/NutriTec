@@ -44,7 +44,7 @@ lee_saludos(Oracion, S) :-
     lee_saludos(Oracion1, S).
 lee_saludos(S, S). % caso base: cuando no hay más saludos
 
-/*
+
 %Posibles despedidas
 despedida([muchas|S], S).
 despedida([gracias|S], S).
