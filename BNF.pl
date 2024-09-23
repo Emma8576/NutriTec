@@ -44,7 +44,7 @@ lee_saludos(Oracion, S) :-
     lee_saludos(Oracion1, S).
 lee_saludos(S, S). % caso base: cuando no hay más saludos
 
-
+/*
 %Posibles despedidas
 despedida([muchas|S], S).
 despedida([gracias|S], S).
@@ -201,7 +201,7 @@ verboTransitivo(p,s,['organizar'|S],S).
 verboTransitivo(p,s,['nutrir'|S],S).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PRONOMBRES primera Personaona
+% PRONOMBRES primera persona
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 pronombre(p,s,n,['Yo'|S],S).
@@ -362,7 +362,6 @@ lee_ayuda(Oracion, S) :-
 
 % SubLista de adjetivos, lista de dietas
 adjetivo(s,f,['keto'|S],S).
-adjetivo(s,f,['cetogenica'|S],S).
 adjetivo(s,f,['proteina'|S],S).
 adjetivo(s,f,['proteica'|S],S).
 adjetivo(s,f,['vegetariana'|S],S).
