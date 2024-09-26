@@ -3,8 +3,8 @@
 %                           Asly Barahona Maroto
 %                           Emmanuel Calvo Mora
 %                           Fabian Gutierrez Jimenez
-%                           Joaquin Ramirez Sequiera
-%""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+%                           Joaquin Ramirez Sequiera   
+%""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""  
 
 %Saludos posibles
 saludo(['Hola'|S],S).
@@ -18,7 +18,7 @@ saludo(['dias'|S], S).
 saludo(['buenas'|S], S).
 saludo(['tardes'|S], S).
 saludo(['noches'|S], S).
-saludo(['pura'|S], S).
+saludo(['pura'|S], S). 
 saludo(['vida'|S], S).
 saludo(['saludos'|S], S).
 saludo(['qué'|S], S).
@@ -183,7 +183,7 @@ verboTransitivo(p,s,['padecer'|S],S).
 verboTransitivo(p,s,['realizar'|S],S).
 verboTransitivo(p,s,['seguir'|S],S).
 verboTransitivo(p,s,['comer'|S],S).
-verboTransitivo(p,s,['beber'|S],S).
+verboTransitivo(p,s,['beber'|S],S).   
 verboTransitivo(p,s,['cocinar'|S],S).
 verboTransitivo(p,s,['preparar'|S],S).
 verboTransitivo(p,s,['controlar'|S],S).
@@ -474,7 +474,7 @@ oracion(S0,S):-saludo(S0,S).
 oracion(S0,S):-adverbioNegAf(S0,S).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SINTAGMA NOMINAL
+% SINTAGMA NOMINAL 
 % Grupo de palabras que forman un constituyente sintáctico maximal que incluye un sustantivo y sus modificadores
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -491,7 +491,7 @@ sintagmaVerbal(Persona,Numero,S0,S):-verboTransitivo(Persona,Numero,S0,S1),verbo
 sintagmaVerbal(Persona,Numero,S0,S):-verboTransitivo(Persona,Numero,S0,S1),verboInfinitivo(S1,S2),complementoDirecto(_Persona2,_Numero2,_Genero2,S2,S).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% COMPLEMENTO DIRECTO
+% COMPLEMENTO DIRECTO 
 % Grupo de palabras que forman un constituyente sintáctico maximal que incluye un verbo y sus complementos
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -500,16 +500,3 @@ complementoDirecto(_Persona,Numero,Genero,S0,S):-adjetivo(Numero,Genero,S0,S).
 complementoDirecto(Persona,Numero,Genero,S0,S):-nombre(Persona,Numero,Genero,S0,S1),adjetivo(Numero,Genero,S1,S).
 complementoDirecto(Persona,Numero,Genero,S0,S):-determinante(Numero,Genero,S0,S1),nombre(Persona,Numero,Genero,S1,S).
 complementoDirecto(Persona,Numero,Genero,S0,S):-determinante(Numero,Genero,S0,S1),nombre(Persona,Numero,Genero,S1,S2),adjetivo(Numero,Genero,S2,S).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% LEER ENTRADA
-% Toma un string y lo devuelve como una lista con cada elemento que
-% compon�a el string.Permite evaluar la entrada dad por el usuario.
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-leer_entrada(List) :-
-    read_string(user, "\n", "\r", _, String),
-    split_string(String, " ", "", List).%Cada que haya un espacio se toma como un elemento que va para la lista.
-
-
-
