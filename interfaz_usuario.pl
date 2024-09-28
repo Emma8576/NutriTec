@@ -1,13 +1,14 @@
 :- ['BNF'],[dietas].
+:-encoding(utf8).
 
 %Inicio del chat.
 main:- inicio.
 
 %Respuesta para entrada esperada.
 inicio:-
-   leer_entrada(EntradaUsuario), %Toma la entrada y la vuelve una lista para su evalución
-   %oracion(EntradaUsuario,[]), %Evalúa  la estructura de la orción.
-   EntradaUsuario = ['Hola','NutriTec'], %Entrada Válida para el inicio del chat.
+   leer_entrada(EntradaUsuario), %Toma la entrada y la vuelve una lista para su evaluciï¿½n
+   %oracion(EntradaUsuario,[]), %Evalï¿½a  la estructura de la orciï¿½n.
+   EntradaUsuario = ['Hola','NutriTec'], %Entrada Vï¿½lida para el inicio del chat.
    write('Hola, encantado de verlo mejorar su estilo de vida. CuÃ©nteme Â¿en quÃ© lo puedo ayudar?'),nl,continuar. %Respuesta dada
 
 %Si no se optiene la respuesta esperada, el chat no avanza.
@@ -15,14 +16,14 @@ inicio:-inicio.
 % inicio:-write('Disculpa,no te entendi.'),nl,inicio.Corregir faltas de
 % ortografia en el texto enviado al usuario
 
-%Continuar:respuesta válida
+%Continuar:respuesta vï¿½lida
 %Se debe llamar la sentencia que permite la identificacion de respuestas
 continuar:-
    leer_entrada(EntradaUsuario),oracion(EntradaUsuario,[]),
    write('Excelente iniciativa. Estamos para asesorarte en todo lo que necesites.'),nl.
 
-%Continuar:respuesta de usuario inválida.
-continuar:-write('Disculpa,no entendi.¿Puedes reeplantear tu respuesta?'),nl,continuar.
+%Continuar:respuesta de usuario invï¿½lida.
+continuar:-write('Disculpa,no entendi.ï¿½Puedes reeplantear tu respuesta?'),nl,continuar.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %SELECCION
@@ -38,7 +39,7 @@ continuar:-write('Disculpa,no entendi.¿Puedes reeplantear tu respuesta?'),nl,con
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CONSULTAR
 %Padecimiento Conocido
-consultar_padecimientos(X,_):-know(padecimiento,X),!. %Se detiene la búsqueda.
+consultar_padecimientos(X,_):-know(padecimiento,X),!. %Se detiene la bï¿½squeda.
 
 %Consultar padecimiento
 consultar_padecimientos(X):-
@@ -60,10 +61,10 @@ verificar_padecimientos([], EntradaUsuario) :-
     Atom = 'No',
     asserta(known(padecimiento, [])).%Registro de no como padecimiento.
 
-%Entrada no válida.
+%Entrada no vï¿½lida.
 verificar_padecimientos(_, EntradaUsuario) :-
   oracion(EntradaUsuario,[]),
-  write('No comprendí lo que indicaste, ¿puedes volverlo a formular?'),
+  write('No comprendï¿½ lo que indicaste, ï¿½puedes volverlo a formular?'),
   leer_entrada(NuevaEntrada), % Se permite una nueva respuesta.
   verificar_padecimientos(_, NuevaEntrada). % Se verifica otra vez
 
@@ -72,11 +73,11 @@ verificar_padecimientos(_, EntradaUsuario) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CONSULTAR
 %Dato conocido
-consultar_calorias(X,_):-know(cant,X),!. %Se detiene la búsqueda.
+consultar_calorias(X,_):-know(cant,X),!. %Se detiene la bï¿½squeda.
 
 %Consultar dato
 consultar_calorias(X):-
-  write('¿Tienes pensado una cantidad específica de calorías diarias por consumir?'),nl,
+  write('ï¿½Tienes pensado una cantidad especï¿½fica de calorï¿½as diarias por consumir?'),nl,
   leer_entrada(EntradaUsuario),
   verificar_calorias(X,EntradaUsuario).%Se verifica el dato de calorias
 
@@ -94,10 +95,10 @@ verificar_calorias([], EntradaUsuario) :-
     Atom = 'No',
     asserta(known(cant, [])).%Registro de no como calorias.
 
-%Entrada no válida.
+%Entrada no vï¿½lida.
 verificar_calorias(_, EntradaUsuario) :-
   oracion(EntradaUsuario,[]),
-  write('No comprendí lo que indicaste, ¿puedes volverlo a formular?'),
+  write('No comprendï¿½ lo que indicaste, ï¿½puedes volverlo a formular?'),
   leer_entrada(NuevaEntrada), % Se permite una nueva respuesta.
   verificar_calorias(_, NuevaEntrada). % Se verifica otra vez
 
@@ -106,11 +107,11 @@ verificar_calorias(_, EntradaUsuario) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CONSULTAR
 %Dato conocido
-consultar_actividad(X,_):-know(frecuencia,X),!. %Se detiene la búsqueda.
+consultar_actividad(X,_):-know(frecuencia,X),!. %Se detiene la bï¿½squeda.
 
 %Consultar frecuencia de actividad fisica.
 consultar_actividad(X):-
-  write('¿Eres activo físicamente?'),nl,
+  write('ï¿½Eres activo fï¿½sicamente?'),nl,
   leer_entrada(EntradaUsuario),
   verificar_actividad(X,EntradaUsuario).%Se verifica el dato de calorias.
 
@@ -128,10 +129,10 @@ verificar_actividad([], EntradaUsuario) :-
     Atom = 'No',
     asserta(known(frecuencia, [])).%Registro de no como actividad fisica realizada.
 
-%Entrada no válida.
+%Entrada no vï¿½lida.
 verificar_actividad(_, EntradaUsuario) :-
   oracion(EntradaUsuario,[]),
-  write('No comprendí lo que indicaste, ¿puedes volverlo a formular?'),
+  write('No comprendï¿½ lo que indicaste, ï¿½puedes volverlo a formular?'),
   leer_entrada(NuevaEntrada), % Se permite una nueva respuesta.
   verificar_actividad(_, NuevaEntrada). % Se verifica otra vez
 
@@ -141,11 +142,11 @@ verificar_actividad(_, EntradaUsuario) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CONSULTAR
 %Dieta conocidas
-consultar_dieta(X,_):-know(diet,X),!. %Se detiene la búsqueda.
+consultar_dieta(X,_):-know(diet,X),!. %Se detiene la bï¿½squeda.
 
 %Consultar dieta que no se desea llevar
 consultar_dieta(X):-
-  write('¿Tienes un tipo de dieta que no te gustaría realizar?'),nl,
+  write('ï¿½Tienes un tipo de dieta que no te gustarï¿½a realizar?'),nl,
   leer_entrada(EntradaUsuario),
   verificar_dieta(X,EntradaUsuario).%Se verifica la dieta elegida.
 
@@ -163,10 +164,10 @@ verificar_dieta([], EntradaUsuario) :-
     Atom = 'No',
     asserta(known(diet, [])).%Registro de no como dieta que no se desea llevar.
 
-%Entrada no válida.
+%Entrada no vï¿½lida.
 verificar_dieta(_, EntradaUsuario) :-
   oracion(EntradaUsuario,[]),
-  write('No comprendí lo que indicaste, ¿puedes volverlo a formular?'),
+  write('No comprendï¿½ lo que indicaste, ï¿½puedes volverlo a formular?'),
   leer_entrada(NuevaEntrada), % Se permite una nueva respuesta.
   verificar_dieta(_, NuevaEntrada). % Se verifica otra vez
 
@@ -175,11 +176,11 @@ verificar_dieta(_, EntradaUsuario) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CONSULTAR
 %Dieta conocidas
-consultar_comida(X,_):-know(comida,X),!. %Se detiene la búsqueda.
+consultar_comida(X,_):-know(comida,X),!. %Se detiene la bï¿½squeda.
 
 %Consultar comida que no se desea comsumir
 consultar_comida(X):-
-  write('¿Qué alimentos preferirías no consumir?'),nl,
+  write('ï¿½Quï¿½ alimentos preferirï¿½as no consumir?'),nl,
   leer_entrada(EntradaUsuario),
   verificar_comida(X,EntradaUsuario).%Se verifica la comida elegida.
 
@@ -197,13 +198,12 @@ verificar_comida([], EntradaUsuario) :-
     Atom = 'No',
     asserta(known(comida, [])).%Registro de no como comida.
 
-%Entrada no válida.
+%Entrada no vï¿½lida.
 verificar_comida(_, EntradaUsuario) :-
   oracion(EntradaUsuario,[]),
-  write('No comprendí lo que indicaste, ¿puedes volverlo a formular?'),
+  write('No comprendï¿½ lo que indicaste, ï¿½puedes volverlo a formular?'),
   leer_entrada(NuevaEntrada), % Se permite una nueva respuesta.
   verificar_comida(_, NuevaEntrada). % Se verifica otra vez
-
 
 
 

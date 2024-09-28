@@ -1,3 +1,5 @@
+:-encoding(utf8).
+
 %En esta sección se definen las dietas que el programa puede recomendar al usuario
 
 %funcion miembro de una lista
@@ -235,4 +237,31 @@ Cena:  1 filete de ternera con ensalada.') :-
   calorias(Cal), (Cal<4000, Cal>=3000),
   padecimientos(P), miembro(P, [sobrepeso, desnutrido, []]),
   actividad(A), miembro(A, [4, 5, 6]),
+  comida(C), not(miembro(C, ['maní', 'jamón', 'salchicha'])).
+
+%%% DIETA EJEMPLO 1
+
+dieta('Puedes empezar con el siguiente plan alimenticio bajo en grasas.
+Desayuno: ½ taza de gallo pinto.
+1 Huevo + rebanada de queso blanco.
+1 cdta de aceite de oliva para preparar el huevo.
+Merienda Mañana: ½ taza de yogurt light.
+¼ taza de granola sin azúcar añadida.
+1 taza de papaya picada.
+Almuerzo: 2 tazas de ensalada Mixta
+1/3 taza de arroz + ½ taza de frijoles, garbanzos o lentejas.
+1 Filet de pechuga de pollo a la plancho
+Merienda tarde: 1 taza de café o té.
+2 Rebanadas de pan Integral.
+30g de atún en agua.
+1 cdta de margarina.
+Cena: 2 tazas de ensalada verde mixta.
+1 tortilla de trigo.
+1 lata de atún mediana en agua.
+1/8 de aguacate.'):-
+
+  tipo(T), miembro(T, [proteica, 'Keto', []]),
+  calorias(Cal), (Cal<3000, Cal>=1800),
+  padecimientos(P), miembro(P, [sobrepeso, desnutrido, dislipidemia, []]),
+  actividad(A), miembro(A, [0, 1, 2, 3]),
   comida(C), not(miembro(C, ['maní', 'jamón', 'salchicha'])).
