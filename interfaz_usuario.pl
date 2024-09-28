@@ -1,6 +1,19 @@
 :- ['BNF'],[dietas].
 :-encoding(utf8).
 
+%Parametros utilizados en la evaluación de datos
+%Padecimiento
+padecimiento(X):- tipos_padecimientos(Y), consultar_padecimientos(X,Y).
+%Calorias
+
+%Actividad física
+frecuencia(X):-frecuencia_actividades(Y),consultar_actividad(X,Y).
+%Dieta
+diet(X):- tipos_dietas(Y), consultar_dieta(X,Y).
+%Comida
+comida(X):-tipos_comidas(Y), consultar_comida(X,Y).
+
+
 %Inicio del chat.
 main:- inicio.
 
@@ -20,7 +33,7 @@ inicio:-inicio.
 %Se debe llamar la sentencia que permite la identificacion de respuestas
 continuar:-
    leer_entrada(EntradaUsuario),oracion(EntradaUsuario,[]),
-   write('Excelente iniciativa. Estamos para asesorarte en todo lo que necesites.'),nl.
+   write('Excelente iniciativa. Estamos para asesorarte en todo lo que necesites.'),nl,seleccion.
 
 %Continuar:respuesta de usuario invï¿½lida.
 continuar:-write('Disculpa,no entendi.ï¿½Puedes reeplantear tu respuesta?'),nl,continuar.

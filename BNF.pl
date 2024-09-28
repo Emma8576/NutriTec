@@ -368,9 +368,11 @@ complementoDirecto(Pers,Num,Gend,S0,S):-determinante(Num,Gend,S0,S1),nombre(Pers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LEER ENTRADA
 % Toma un string y lo devuelve como una lista con cada elemento que
-% componï¿½a el string.Permite evaluar la entrada dad por el usuario.
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% componía el string.Permite evaluar la entrada dad por el usuario.
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 leer_entrada(List) :-
     read_string(user, "\n", "\r", _, String),
-    split_string(String, " ", "", List).%Cada que haya un espacio se toma como un elemento que va para la lista.
+    atom_string(Atom,String),
+    atomic_list_concat(List,' ',Atom).
+
+
