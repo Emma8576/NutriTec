@@ -374,8 +374,3 @@ complementoDirecto(Pers,Num,Gend,S0,S):-determinante(Num,Gend,S0,S1),nombre(Pers
 leer_entrada(List) :-
     read_string(user, "\n", "\r", _, String),
     split_string(String, " ", "", List).%Cada que haya un espacio se toma como un elemento que va para la lista.
-
-    my_read(List):-
-        read_string(user,"\n","\r",_,String),
-        atom_string(Atom,String),
-        atomic_list_concat(List,' ',Atom).
