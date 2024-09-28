@@ -374,4 +374,4 @@ leer_entrada(List) :-
     read_string(user, "\n", "\r", _, String),
     atom_string(Atom,String),
     atomic_list_concat(List,' ',Atom).
-    %write('Entrada procesada: '), write(List), nl. % Imprimir la lista resultan
+    %write('Entrada procesada: '), write(List), nl. % Imprimir la lista resultant

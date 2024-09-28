@@ -60,11 +60,11 @@ preguntar_calorias:-
 
 % Verificar si hay algun numero (calorias) en la entrada del usuario
 verificar_calorias([Palabra | Resto]) :-
-    atom_number(Palabra, Numero), % Convierte cada palabra a un numero
+    atom_number(Palabra, Numero), % Convierte cada palabra a un número
     integer(Numero),
     asserta(known(calorias, Numero)), !. % Almacena las calorías encontrada
 
-verificar_calorias([Palabra | _]) :- % cuando la palabra es no
+verificar_calorias([Palabra | _]) :- % cuando la palabra es "no"
     Palabra = no,
     asserta(known(calorias, 0)), !.
 
@@ -118,7 +118,7 @@ preguntar_comida:-
 preguntar_comida:-
    write('Ok.'),nl.%caso donde la comida indicada no esta registrada
 
-% Verificar si hay algun tipo de dieta valida en la entrada del usuario
+% Verificar si hay algún tipo de dieta valida en la entrada del usuario
 verificar_comida(List) :-
     tipos_comidas(Comidas),
     member(Comida, List),
