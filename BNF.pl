@@ -214,6 +214,9 @@ nombre(t,p,f,[_NumCalorias,'calorias'|S],S).
 nombre(t,p,f,[_NumCalorias,'para', 'empezar'|S],S).
 nombre(t,s,m,['activo'|S],S).
 nombre(t,p,f,[_NumVeces,'veces','a','la','semana'|S],S).
+nombre(t,p,f,[_NumVeces,'veces','a','la','semana','una','hora'|S],S).
+nombre(t,p,f,[_NumVeces,'veces','a','la','semana',_NumHoras,'hora'|S],S).
+nombre(t,p,f,[_NumVeces,'veces','a','la','semana',_NumHoras,'horas'|S],S).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ADJETIVOS : descripciones de los nombres
@@ -237,6 +240,8 @@ adjetivo(s,f,['proteica'|S],S).
 adjetivo(s,f,['normal'|S],S).
 adjetivo(s,m,['normal'|S],S).
 adjetivo(s,m,[_NumVeces,'veces','a','la','semana'|S],S).
+adjetivo(s,m,[_NumVeces,'veces','a','la','semana',_NumHoras,'hora'|S],S).
+adjetivo(s,m,[_NumVeces,'veces','a','la','semana',_NumHoras,'horas'|S],S).
 
 % SubLista de adjetivos, lista de dietas
 adjetivo(s,f,['keto'|S],S).
@@ -368,7 +373,7 @@ complementoDirecto(Pers,Num,Gend,S0,S):-determinante(Num,Gend,S0,S1),nombre(Pers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LEER ENTRADA
 % Toma un string y lo devuelve como una lista con cada elemento que
-% componía el string.Permite evaluar la entrada dad por el usuario.
+% componï¿½a el string.Permite evaluar la entrada dad por el usuario.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 leer_entrada(List) :-
     read_string(user, "\n", "\r", _, String),
