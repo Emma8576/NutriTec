@@ -1,4 +1,13 @@
-:- ['BNF'],[dietas].
+:- ['BNF'].
+:- [dietas].
+
+%Inicio del chat.
+main:- inicio.
+
+%Respuesta para entrada esperada.
+inicio:-
+   leer_entrada(entrada_usuario), %Toma la entrada y la vuelve una lista para su evalución
+   oracion(entrada_usuario,[]), %Eva:-['BNF'],[dietas].
 
 %Inicio del chat.
 main:- inicio.
