@@ -3,12 +3,20 @@
 
 :- dynamic known/2.
 
+limpiar_known :-
+    retractall(known(comida, _)),
+    retractall(known(cactividad, _)),
+    retractall(known(padecimiento, _)),
+    retractall(known(calorias, _)),
+    retractall(known(dieta, _)).
+
 
 % Inicio del chat.
 main:- inicio.
 
 %Respuesta para entrada esperada.
 inicio:-
+   limpiar_known, % asegurarse que no hay registros anteriores
    leer_entrada(EntradaUsuario), %Toma la entrada y la vuelve una lista para su evalucion
    EntradaUsuario = ['Hola','NutriTec'], %Entrada valida para el inicio del chat.
    write('Hola, encantado de verlo mejorar su estilo de vida. Cuénteme, ¿En qué lo puedo ayudar?'),nl,continuar. %Respuesta dada si se inicia el chat correctamente
@@ -68,7 +76,7 @@ verificar_calorias([Palabra | Resto]) :-
     integer(Numero),
     asserta(known(calorias, Numero)), !. % Almacena las calor�as encontrada
 
-verificar_calorias([Palabra | _]) :- % cuando la palabra es no
+verificar_calorias([Palabra|_]) :-
     Palabra = no,
     asserta(known(calorias, 2500)), !.
 
@@ -84,15 +92,18 @@ verificar_calorias([_ | Resto]) :-
 preguntar_actividad:-
    leer_entrada(EntradaUsuario),
    oracion(EntradaUsuario,[]), %%FALTA GUARDAR ESTE DATO PARA LA SELECCION
-   verificar_actividad,
+   verificar_actividad(EntradaUsuario),
    write('Lo tendremos en cuenta ¿Que tipo de dieta le gustaria realizar? '),nl, preguntar_dieta.
 
 preguntar_actividad:-
    write('Disculpe,no entendi sus habitos de actividad fisica ¿Puede reeplantear su respuesta?'),nl, preguntar_actividad.%caso de respuesta invalida
 
-verificar_actividad:-
-   asserta(known(actividad, 3)).
-
+verificar_actividad(EntradaUsuario) :-
+    ( prim_num(EntradaUsuario, Num) ->
+        asserta(known(actividad, Num))
+    ; % De lo contrario
+        asserta(known(actividad, 1))  % asume la actividad como 1
+    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DIETA
@@ -122,16 +133,25 @@ verificar_dieta(List) :-
 preguntar_comida:-
    leer_entrada(EntradaUsuario),
    verificar_comida(EntradaUsuario),
-   write('Ok, lo tendremos en cuenta.'),nl, dieta.
+   write('Ok, lo tendremos en cuenta.'),nl,
+   dieta,
+   nl,
+   leer_entrada(EntradaUsuario),
+   %oracion(EntradaUsuario,[]),
+   write('Con mucho gusto').
 
 preguntar_comida:-
    asserta(known(comida, [])),
-   write('Ok.'),nl, dieta.%caso donde la comida indicada no esta registrada
+   write('Ok.'),nl,
+   dieta,
+   nl,
+   leer_entrada(EntradaUsuario),
+   write('Con mucho gusto').
+                               %caso donde la comida indicada no esta registrada
 
 % Verificar si hay algun tipo de dieta valida en la entrada del usuario
 verificar_comida(List) :-
     tipos_comidas(Comidas),
     member(Comida, List),
     member(Comida,  Comidas),
-    asserta(known(comida, Comida)), !.  % Guarda si se encontro un padecimiento
-
+    asserta(known(comida, Comida)), !.

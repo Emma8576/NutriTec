@@ -380,6 +380,6 @@ leer_entrada(List) :-
 % PRIM NUM
 % Busca tomar el primer número encontrado de la oración.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-prim_num([F| _],N) :- atom_number(F,N), !.%Busca tomar el primero elemento como numero
+prim_num([F| _],N) :- atom_number(F,N), !.  %Busca tomar el primero elemento como numero
 
-prim_num([_ |R],N) :- prim_num(R,N).%Si no se encuentra en la primer palabra se sigue con el resto de la oracion
+prim_num([_ |R],N) :- prim_num(R,N).   %Si no se encuentra en la primer palabra se sigue con el resto de la oracion

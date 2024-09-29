@@ -34,7 +34,7 @@ frecuencia_actividades([0, 1, 2, 3, 4, 5, 6, 7]).
 
 dieta:-
     known(calorias, X), X >= 3000,
-    actividad(A), (A =< 1),
+    known(actividad, Y), Y > 4,
     write('Es necesario aumentar la actividad física si desea consumir tantas calorías diarias. No puedo recomendar una dieta que cumpla dichas espectativas.'),nl.
 
 dieta:-
@@ -44,7 +44,7 @@ dieta:-
 
 
 dieta:-
-    known(dieta, X), X = vegana,
+    known(dieta, X), (X = vegana; X = vegetariana),
     known(comida, Y),Y= vegetales,
     write('Disculpe, es imposible asignarle una dieta vegana si no le gustan los vegetales.'),nl.
 

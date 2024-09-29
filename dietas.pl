@@ -44,7 +44,7 @@ dieta:-
 
 
 dieta:-
-    known(dieta, X), X = vegana,
+    known(dieta, X), (X = vegana; X = vegetariana),
     known(comida, Y),Y= vegetales,
     write('Disculpe, es imposible asignarle una dieta vegana si no le gustan los vegetales.'),nl.
 
@@ -107,7 +107,7 @@ dieta:-
                         osteoporosis, enfermedad_cardiaca, estres, lactosa, sindrome_metabolico,
                         desnutrido, desnutrida, desnutricion, ninguno, ningun, ninguna, no]),
     known( actividad, A), miembro(A, [0, 1, 2, 3, 4, 5]),
-    known(comida,C), not(miembro(C, [pinto, verduras, garbanzos, avena, frutas, fruta, tortillas, queso, soya])),
+    known(comida,C), not(miembro(C, [pinto, verduras, vegetales, garbanzos, avena, frutas, fruta, tortillas, queso, soya])),
     dieta3.
 
 %%% DIETA 4
