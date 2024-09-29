@@ -370,8 +370,16 @@ complementoDirecto(Pers,Num,Gend,S0,S):-determinante(Num,Gend,S0,S1),nombre(Pers
 % Toma un string y lo devuelve como una lista con cada elemento que
 % componía el string.Permite evaluar la entrada dad por el usuario.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 leer_entrada(List) :-
     read_string(user, "\n", "\r", _, String),
     atom_string(Atom,String),
     atomic_list_concat(List,' ',Atom).
-    %write('Entrada procesada: '), write(List), nl. % Imprimir la lista resultan
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PRIM NUM
+% Busca tomar el primer número encontrado de la oración.
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+prim_num([F| _],N) :- atom_number(F,N), !.%Busca tomar el primero elemento como numero
+
+prim_num([_ |R],N) :- prim_num(R,N).%Si no se encuentra en la primer palabra se sigue con el resto de la oracion

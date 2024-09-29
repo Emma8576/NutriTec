@@ -1,6 +1,9 @@
 :- ['BNF'],[dietas].
 :-encoding(utf8).
 
+:- dynamic known/2.
+
+
 % Inicio del chat.
 main:- inicio.
 
@@ -35,7 +38,8 @@ preguntar_padecimiento:-
 
 preguntar_padecimiento:-
    write('Â¿Tienes pensado una cantidad especifica de calorias diarias por consumir? '),nl,
-   preguntar_padecimiento.%caso donde la enfermedad no esta registrada
+   asserta(known(padecimiento, [])),
+   preguntar_calorias.%caso donde la enfermedad no esta registrada
 
 
 % Verificar si hay algun padecimiento en la entrada del usuario
@@ -66,7 +70,7 @@ verificar_calorias([Palabra | Resto]) :-
 
 verificar_calorias([Palabra | _]) :- % cuando la palabra es no
     Palabra = no,
-    asserta(known(calorias, 0)), !.
+    asserta(known(calorias, 2500)), !.
 
 verificar_calorias([_ | Resto]) :-
     verificar_calorias(Resto). % Revisa el resto de la lista (de la entrada)
@@ -80,10 +84,18 @@ verificar_calorias([_ | Resto]) :-
 preguntar_actividad:-
    leer_entrada(EntradaUsuario),
    oracion(EntradaUsuario,[]), %%FALTA GUARDAR ESTE DATO PARA LA SELECCION
+   verificar_actividad(EntradaUsuario),
    write('Lo tendremos en cuenta Â¿Que tipo de dieta le gustaria realizar? '),nl, preguntar_dieta.
 
 preguntar_actividad:-
    write('Disculpe,no entendi sus habitos de actividad fisica Â¿Puede reeplantear su respuesta?'),nl, preguntar_actividad.%caso de respuesta invalida
+
+verificar_actividad(EntradaUsuario):-
+       prim_num(EntradaUsuario,Num),%Extrae el primer número encontrado en la oración
+       asserta(known(actividad, Num)).
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DIETA
@@ -113,10 +125,11 @@ verificar_dieta(List) :-
 preguntar_comida:-
    leer_entrada(EntradaUsuario),
    verificar_comida(EntradaUsuario),
-   write('Ok, lo tendremos en cuenta.'),nl.
+   write('Ok, lo tendremos en cuenta.'),nl, dieta.
 
 preguntar_comida:-
-   write('Ok.'),nl.%caso donde la comida indicada no esta registrada
+   asserta(known(comida, [])),
+   write('Ok.'),nl, dieta.%caso donde la comida indicada no esta registrada
 
 % Verificar si hay algun tipo de dieta valida en la entrada del usuario
 verificar_comida(List) :-
