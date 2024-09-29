@@ -1,11 +1,22 @@
 :- ['BNF'],[dietas].
 :-encoding(utf8).
 
+:- dynamic known/2.
+
+limpiar_known :-
+    retractall(known(comida, _)),
+    retractall(known(cactividad, _)),
+    retractall(known(padecimiento, _)),
+    retractall(known(calorias, _)),
+    retractall(known(dieta, _)).
+
+
 % Inicio del chat.
 main:- inicio.
 
 %Respuesta para entrada esperada.
 inicio:-
+   limpiar_known, % asegurarse que no hay registros anteriores
    leer_entrada(EntradaUsuario), %Toma la entrada y la vuelve una lista para su evalucion
    EntradaUsuario = ['Hola','NutriTec'], %Entrada valida para el inicio del chat.
    write('Hola, encantado de verlo mejorar su estilo de vida. Cuénteme, ¿En qué lo puedo ayudar?'),nl,continuar. %Respuesta dada si se inicia el chat correctamente
@@ -35,7 +46,8 @@ preguntar_padecimiento:-
 
 preguntar_padecimiento:-
    write('¿Tienes pensado una cantidad especifica de calorias diarias por consumir? '),nl,
-   preguntar_padecimiento.%caso donde la enfermedad no esta registrada
+   asserta(known(padecimiento, [])),
+   preguntar_calorias.%caso donde la enfermedad no esta registrada
 
 
 % Verificar si hay algun padecimiento en la entrada del usuario
@@ -64,9 +76,9 @@ verificar_calorias([Palabra | Resto]) :-
     integer(Numero),
     asserta(known(calorias, Numero)), !. % Almacena las calor�as encontrada
 
-verificar_calorias([Palabra | _]) :- % cuando la palabra es no
+verificar_calorias([Palabra|_]) :-
     Palabra = no,
-    asserta(known(calorias, 0)), !.
+    asserta(known(calorias, 2500)), !.
 
 verificar_calorias([_ | Resto]) :-
     verificar_calorias(Resto). % Revisa el resto de la lista (de la entrada)
@@ -79,17 +91,19 @@ verificar_calorias([_ | Resto]) :-
 % Preguntar actividad: pide y verifica si realiza actividad, revisa la oracion con el bnf
 preguntar_actividad:-
    leer_entrada(EntradaUsuario),
-   oracion(EntradaUsuario,[]),
+   oracion(EntradaUsuario,[]), %%FALTA GUARDAR ESTE DATO PARA LA SELECCION
    verificar_actividad(EntradaUsuario),
-   write('Lo tendremos en cuenta ¿Que tipo de dieta le gustaria realizar? '),nl, preguntar_dieta.
+   write('Lo tendremos en cuenta ¿Puede tipo de dieta le gustaria realizar? '),nl, preguntar_dieta.
 
 preguntar_actividad:-
-   write('Disculpe,no entendi sus habitos de actividad fisica ¿Puede reeplantear su respuesta?'),nl, preguntar_actividad.%caso de respuesta invalida}
+   write('Disculpe,no entendi sus habitos de actividad fisica ¿Puede reeplantear su respuesta?'),nl, preguntar_actividad.%caso de respuesta invalida
 
-verificar_actividad(EntradaUsuario):-
-       prim_num(EntradaUsuario,Num),%Extrae el primer n�mero encontrado en la oraci�n
-       asserta(known(actividad, Num)).
-
+verificar_actividad(EntradaUsuario) :-
+    ( prim_num(EntradaUsuario, Num) ->
+        asserta(known(actividad, Num))
+    ; % De lo contrario
+        asserta(known(actividad, 1))  % asume la actividad como 1
+    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DIETA
@@ -119,15 +133,24 @@ verificar_dieta(List) :-
 preguntar_comida:-
    leer_entrada(EntradaUsuario),
    verificar_comida(EntradaUsuario),
-   write('Ok, lo tendremos en cuenta.'),nl.
+   write('Ok, lo tendremos en cuenta.'),nl,
+   dieta,
+   nl,
+   leer_entrada(EntradaUsuario1),
+   write('Con mucho gusto').
 
 preguntar_comida:-
-   write('Ok.'),nl.%caso donde la comida indicada no esta registrada
+   asserta(known(comida, [])),
+   write('Ok.'),nl,
+   dieta,
+   nl,
+   leer_entrada(EntradaUsuario),
+   write('Con mucho gusto').
+                               %caso donde la comida indicada no esta registrada
 
 % Verificar si hay algun tipo de dieta valida en la entrada del usuario
 verificar_comida(List) :-
     tipos_comidas(Comidas),
     member(Comida, List),
     member(Comida,  Comidas),
-    asserta(known(comida, Comida)), !.  % Guarda si se encontro un padecimiento
-
+    asserta(known(comida, Comida)), !.
