@@ -93,7 +93,7 @@ preguntar_actividad:-
    leer_entrada(EntradaUsuario),
    oracion(EntradaUsuario,[]), %%FALTA GUARDAR ESTE DATO PARA LA SELECCION
    verificar_actividad(EntradaUsuario),
-   write('Lo tendremos en cuenta ¿Que tipo de dieta le gustaria realizar? '),nl, preguntar_dieta.
+   write('Lo tendremos en cuenta ¿Puede tipo de dieta le gustaria realizar? '),nl, preguntar_dieta.
 
 preguntar_actividad:-
    write('Disculpe,no entendi sus habitos de actividad fisica ¿Puede reeplantear su respuesta?'),nl, preguntar_actividad.%caso de respuesta invalida
@@ -136,7 +136,7 @@ preguntar_comida:-
    write('Ok, lo tendremos en cuenta.'),nl,
    dieta,
    nl,
-   leer_entrada(EntradaUsuario),
+   leer_entrada(EntradaUsuario1),
    write('Con mucho gusto').
 
 preguntar_comida:-
