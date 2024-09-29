@@ -79,11 +79,17 @@ verificar_calorias([_ | Resto]) :-
 % Preguntar actividad: pide y verifica si realiza actividad, revisa la oracion con el bnf
 preguntar_actividad:-
    leer_entrada(EntradaUsuario),
-   oracion(EntradaUsuario,[]), %%FALTA GUARDAR ESTE DATO PARA LA SELECCION
+   oracion(EntradaUsuario,[]),
+   verificar_actividad(EntradaUsuario),
    write('Lo tendremos en cuenta Â¿Que tipo de dieta le gustaria realizar? '),nl, preguntar_dieta.
 
 preguntar_actividad:-
-   write('Disculpe,no entendi sus habitos de actividad fisica Â¿Puede reeplantear su respuesta?'),nl, preguntar_actividad.%caso de respuesta invalida
+   write('Disculpe,no entendi sus habitos de actividad fisica Â¿Puede reeplantear su respuesta?'),nl, preguntar_actividad.%caso de respuesta invalida}
+
+verificar_actividad(EntradaUsuario):-
+       prim_num(EntradaUsuario,Num),%Extrae el primer número encontrado en la oración
+       asserta(known(actividad, Num)).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DIETA
